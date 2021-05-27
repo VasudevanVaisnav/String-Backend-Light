@@ -24,7 +24,7 @@ function login(req,res,next){
                         return res.status(250).json({"error":true,"message":"login failed"});
                     }
                     else if(verdict){
-                        user.updateOne({"mobile":uname},{$set:{publicKeyMod:req.body.mod,publickKeyExp:req.body.exp,address:req.body.notifToken,device:req.body.device}},(modErr,modRes)=>{
+                        user.updateOne({"mobile":uname},{$set:{publicKeyMod:req.body.mod,publicKeyExp:req.body.exp,address:req.body.notifToken,device:req.body.device}},(modErr,modRes)=>{
                             if (!modErr && modRes){
                                 console.log("Success");
                                 return res.status(200).json({"error":false,"message":fres});
