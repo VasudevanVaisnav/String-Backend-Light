@@ -26,8 +26,11 @@ function sendmsg(req,res,err){
         else{
             registrationTokens = [];
             registrationTokens.push(fres.address)
+            console.log(registrationTokens);
             sender.send(message, { registrationTokens: registrationTokens }, 10, function (err, response) {
                 if(err){
+                    console.log("failure");
+                    console.log(err);
                     return res.status(250).json({"error":true,"message":"not sent"})
                 }
                 else{
