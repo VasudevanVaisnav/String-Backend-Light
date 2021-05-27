@@ -4,6 +4,7 @@ const nodefcm = require("node-gcm");
 const user = require("../models/user");
 
 function signup(req,res,next){
+    console.log("Signup");
     const name = req.body.name;
     const uname = req.body.uname;
     const pno = req.body.pno;

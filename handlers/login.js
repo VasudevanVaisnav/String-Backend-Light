@@ -4,6 +4,7 @@ const nodefcm = require("node-gcm");
 const user = require("../models/user");
 
 function login(req,res,next){
+    console.log("Login");
     const uname = req.body.uname;
     const pass = req.body.pass;
     if (!isNaN(uname)){

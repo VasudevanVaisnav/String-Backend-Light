@@ -14,9 +14,9 @@ function sendmsg(req,res,err){
     const key = req.body.key;
     const rec = req.body.to;
     const sen = req.body.from;
-    message.addData('from','close update');
-    message.addData('key',req.params.dept);
-    message.addData('message',req.params.type);
+    message.addData('from',sen);
+    message.addData('key',key);
+    message.addData('message',msg);
     user.findOne({"mobile":rec},(ferr,fres)=>{
         if (!ferr && fres){
             return res.status(250).json({"error":true,"message":"not sent"})
