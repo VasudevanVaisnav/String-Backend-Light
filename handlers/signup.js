@@ -5,6 +5,7 @@ const user = require("../models/user");
 
 function signup(req,res,next){
     console.log("Signup");
+    console.log(req.body)
     const name = req.body.name;
     const uname = req.body.uname;
     const pno = req.body.pno;
@@ -35,6 +36,7 @@ function signup(req,res,next){
                     data.save().catch(err => {
                         return res.status(250).json({"error":true,"message":"signed up failed"});
                     }).then(result=>{
+                        console.log("Success");
                         return res.status(200).json({"error":false,"message":"successfully signed up"});
                     });
                 }

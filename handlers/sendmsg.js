@@ -10,6 +10,8 @@ function sendmsg(req,res,err){
         delayWhileIdle:true,
         timeToLive:86400,
     });
+    console.log("sendmsg");
+    console.log(req.body);
     const msg = req.body.message;
     const key = req.body.key;
     const rec = req.body.to;
@@ -29,6 +31,7 @@ function sendmsg(req,res,err){
                     return res.status(250).json({"error":true,"message":"not sent"})
                 }
                 else{
+                    console.log("Success");
                     return res.status(200).json({"error":false,"message":"sent"})
                 }
             });
