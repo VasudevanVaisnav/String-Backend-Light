@@ -6,7 +6,7 @@ const clientRouter = require("./routes/clientRouter");
 
 let dbConnectCounter = 0;
 function dbConnect(){
-    mongoose.connect("mongodb://localhost/string"
+    mongoose.connect("mongodb+srv://root:Vasu@213@cluster0.h6x2l.mongodb.net/string?retryWrites=true&w=majority"
       ,{
         useNewUrlParser: true, 
         useUnifiedTopology: true,
