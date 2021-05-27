@@ -21,10 +21,7 @@ function sendmsg(req,res,err){
     message.addData('message',msg);
     user.findOne({"mobile":rec},(ferr,fres)=>{
         if (!ferr && fres){
-            console.log("here");
-            return res.status(250).json({"error":true,"message":"not sent"})
-        }
-        else{
+            
             registrationTokens = [];
             registrationTokens.push(fres.address)
             console.log(registrationTokens);
@@ -39,6 +36,9 @@ function sendmsg(req,res,err){
                     return res.status(200).json({"error":false,"message":"sent"})
                 }
             });
+        }
+        else{
+            return res.status(250).json({"error":true,"message":"not sent"})
         }
     })
 }
