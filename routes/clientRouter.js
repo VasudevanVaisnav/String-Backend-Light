@@ -15,6 +15,7 @@ const putKey = require("../handlers/putKey");//Done
 const sendmsg = require("../handlers/sendmsg");//Done
 const refreshToken = require("../handlers/refreshToken");//Done
 const getToken = require("../handlers/getToken");//Done
+const getContacts = require("../handlers/getContacts");//Done
 
 router.post('/login',login);//verified
 router.post('/signup',signup);//verified
@@ -23,5 +24,6 @@ router.post('/putkey',putKey);//verified
 router.post('/sendmsg',sendmsg);
 router.post('/refreshtoken',refreshToken);//verified
 router.post('/gettoken',getToken);//verified
+router.post('/getcontacts',getContacts);//verified
 
 module.exports=router
