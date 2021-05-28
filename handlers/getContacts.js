@@ -8,6 +8,8 @@ function check(ip,op){
         const contact = ip[ip.length-1];
         newIp.pop();
         var newOp = op;
+        console.log(contact);
+        console.log(newOp);
         user.findOne({"mobile":contact.pno},(error,result)=>{
             if (!error && result){
                 newOp.push(contact);
@@ -18,11 +20,11 @@ function check(ip,op){
 }
 function getContacts(req,res,next){
     console.log("contacts");
-    console.log(req.body)
+    // console.log(req.body)
     const ipList = req.body.contacts;
     var opList = []
     var outList = check(ipList,opList);
-    console.log(opList)
+    // console.log(opList)
     return res.status(200).json({"error":false,"message":outList});
 }
 module.exports = getContacts;
