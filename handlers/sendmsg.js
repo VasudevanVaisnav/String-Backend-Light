@@ -16,7 +16,8 @@ function sendmsg(req,res,err){
     const key = req.body.key;
     const rec = req.body.to;
     const sen = req.body.from;
-    message.addData('from',sen);
+    message.addData('fromNum',sen);
+    message.addData('fromName',sen);
     message.addData('key',key);
     message.addData('message',msg);
     user.findOne({"mobile":rec},(ferr,fres)=>{
