@@ -2,7 +2,7 @@ const user = require("../models/user");
 function check(ip,op){
     newIp = ip;
     if (newIp.length==0){
-        return op;
+        return [];
     }
     else{
         const contact = ip[ip.length-1];
@@ -17,8 +17,13 @@ function check(ip,op){
             if (!error && result){
                 newOp.push(contact);
                 console.log("Succ");
+                xyz =  check(newIp,newOp);
+                xyz.push(contact);
+                return xyz;
             }
-            return check(newIp,newOp);
+            else{
+                return check(newIp,newOp);
+            }
         });
     }
 }
