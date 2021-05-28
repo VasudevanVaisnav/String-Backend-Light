@@ -1,40 +1,30 @@
 const user = require("../models/user");
-function check(ip,op){
-    newIp = ip;
-    if (newIp.length==0){
-        return [];
+var i = 0;
+
+function check(res,ip,op){
+    if (ip.length==0){
+        return res.status(200).json({"message":op});
     }
     else{
-        const contact = ip[ip.length-1];
-        newIp.pop();
-        var newOp = op;
-        // console.log(contact);
-        // console.log(newOp);
-        if (contact.pno=="9942289061"){
-            console.log("Check");
-        }
+        let contact = ip[ip.length-1]
+        ip.pop()
         user.findOne({"mobile":contact.pno},(error,result)=>{
             if (!error && result){
-                newOp.push(contact);
-                console.log("Succ");
-                xyz =  check(newIp,newOp);
-                xyz.push(contact);
-                return xyz;
+                op.push(contact);
+                return check(res,ip,op);
             }
             else{
-                return check(newIp,newOp);
+                return check(res,ip,op);
             }
-        });
+        })
     }
 }
+
 function getContacts(req,res,next){
     console.log("contacts");
-     console.log(req.body)
+    console.log(req.body)
     const ipList = req.body.contacts;
     var opList = []
-    var outList = check(ipList,opList);
-    console.log("opList")
-    console.log(opList)
-    return res.status(200).json({"error":false,"message":outList});
+    return check(res,ipList,opList);
 }
 module.exports = getContacts;
