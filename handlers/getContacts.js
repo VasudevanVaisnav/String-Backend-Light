@@ -8,8 +8,8 @@ function check(ip,op){
         const contact = ip[ip.length-1];
         newIp.pop();
         var newOp = op;
-        console.log(contact);
-        console.log(newOp);
+        // console.log(contact);
+        // console.log(newOp);
         user.findOne({"mobile":contact.pno},(error,result)=>{
             if (!error && result){
                 newOp.push(contact);
