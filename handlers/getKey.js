@@ -1,7 +1,8 @@
 const user = require("../models/user.js");
 function getKey(req,res,next){
     const ofId = req.body.toId;
-    console.log("getKey");console.log(req.body);
+    console.log("getKey");
+    console.log(req.body.toId);
     user.findOne({mobile:ofId},(error,doc)=>{
         if (!error && doc){
             console.log("Success");

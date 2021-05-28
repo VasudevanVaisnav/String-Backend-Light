@@ -5,7 +5,7 @@ const user = require("../models/user");
 
 function login(req,res,next){
     console.log("Login");
-    console.log(req.body);
+    console.log(req.body.uname);
     const uname = req.body.uname;
     const pass = req.body.pass;
     if (!isNaN(uname)){

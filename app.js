@@ -42,6 +42,8 @@ app.use((req,res,next)=>{
     }
 });
 
+/*PING*/
+app.get('/',(req,res)=>{res.send("Server is on!!")});
 app.use('/client',clientRouter);
 
 app.use((req,res,next)=>{

@@ -5,7 +5,7 @@ const user = require("../models/user");
 
 function signup(req,res,next){
     console.log("Signup");
-    console.log(req.body)
+    console.log(req.body.uname)
     const name = req.body.name;
     const uname = req.body.uname;
     const pno = req.body.pno;

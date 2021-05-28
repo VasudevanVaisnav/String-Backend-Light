@@ -1,10 +1,10 @@
 const user = require('../models/user.js');
 
 function refreshToken(req,res,next){
-
-    
     var userid = req.body.userid;
     var address = req.body.address;
+    console.log("refresh");
+    console.log(userid);
     user.findOneAndUpdate({mobile:userid},{$set:{address:address}},(error,result)=>{
         if (error){
             return res.status(250).json({"error":true,"message":"unable to refresh"});
