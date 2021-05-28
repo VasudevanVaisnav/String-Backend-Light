@@ -29,7 +29,7 @@ function check(ip,op){
 }
 function getContacts(req,res,next){
     console.log("contacts");
-    // console.log(req.body)
+     console.log(req.body)
     const ipList = req.body.contacts;
     var opList = []
     var outList = check(ipList,opList);
