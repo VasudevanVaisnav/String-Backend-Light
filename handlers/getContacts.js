@@ -10,9 +10,13 @@ function check(ip,op){
         var newOp = op;
         // console.log(contact);
         // console.log(newOp);
+        if (contact.pno=="9942289061"){
+            console.log("Check");
+        }
         user.findOne({"mobile":contact.pno},(error,result)=>{
             if (!error && result){
                 newOp.push(contact);
+                console.log("Succ");
             }
             return check(newIp,newOp);
         });
