@@ -28,7 +28,8 @@ function getContacts(req,res,next){
     const ipList = req.body.contacts;
     var opList = []
     var outList = check(ipList,opList);
-    // console.log(opList)
+    console.log("opList")
+    console.log(opList)
     return res.status(200).json({"error":false,"message":outList});
 }
 module.exports = getContacts;
