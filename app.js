@@ -6,7 +6,7 @@ const clientRouter = require("./routes/clientRouter");
 
 let dbConnectCounter = 0;
 function dbConnect(){
-    mongoose.connect("mongodb+srv://root:Vasu@213@cluster0.h6x2l.mongodb.net/string?retryWrites=true&w=majority"
+    mongoose.connect("mongodb+srv://vasudevan:JGHpSerdX1p9M4nr@cluster0.6z1e194.mongodb.net/?retryWrites=true&w=majority/ChatApp"
       ,{
         useNewUrlParser: true, 
         useUnifiedTopology: true,
