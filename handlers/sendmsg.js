@@ -1,27 +1,32 @@
-const fcm = require("fcm-node")
+const gcm = require("node-gcm")
 const user = require("../models/user.js");
-const sender = new fcm('AAAABvcFeQk:APA91bG09Dp52XI0HV9ZZKplgdzyeiqhrURqoXVXMFp-DbfcmqJAQ_-C_iO10MCBIFuT0nYwypYYC8KfEmcid5RF1oS1S7jdT710Erp9hU9NZL0wcda-TjwKBMSxMHvO5yU1WkTgn-_g');
+const sender = new gcm.Sender('AAAABvcFeQk:APA91bFlHQPzHlRERqujhtnLSjSdajMpNlBLoq9ykowRqdBHZf3AoTUDDO_4VIzM6-N30aqqXVNUOfSWjDKPBkklmZPCjDHvga6DXsFfezu4Ndj3fOB9lu83VeWEbH1xRnLunP0gUQ14');
 function sendmsg(req,res,err){
-
-    var messagef = { 
-        data: {  
-        }
-    };
+   
+    var registrationTokens = [];
+    const message = new gcm.Message({ 
+        priority:'high',
+        contentAvailable:true,
+        delayWhileIdle:true,
+        timeToLive:86400,
+    });
     console.log("sendmsg");
     console.log(req.body);
     const msg = req.body.message;
     const key = req.body.key;
     const rec = req.body.to;
     const sen = req.body.from;
-    messagef.data.fromNum = sen;
-    messagef.data.fromName = sen;
-    messagef.data.key = key;
-    messagef.data.message = msg;
+    message.addData('fromNum',sen);
+    message.addData('fromName',sen);
+    message.addData('key',key);
+    message.addData('message',msg);
     user.findOne({"mobile":rec},(ferr,fres)=>{
         if (!ferr && fres){
-            messagef.to = fres.address;
-            console.log(messagef);
-            sender.send(messagef, function (err, response) {
+            
+            registrationTokens = [];
+            registrationTokens.push(fres.address)
+            console.log(registrationTokens);
+            sender.send(message, { registrationTokens: registrationTokens }, 10, function (err, response) {
                 if(err){
                     console.log("failure");
                     console.log(err);
