@@ -1,6 +1,6 @@
-const gcm = require("node-gcm")
+const fcm = require("fcm-node")
 const user = require("../models/user.js");
-const sender = new gcm.Sender('AAAABvcFeQk:APA91bG09Dp52XI0HV9ZZKplgdzyeiqhrURqoXVXMFp-DbfcmqJAQ_-C_iO10MCBIFuT0nYwypYYC8KfEmcid5RF1oS1S7jdT710Erp9hU9NZL0wcda-TjwKBMSxMHvO5yU1WkTgn-_g');
+const sender = new fcm('AAAABvcFeQk:APA91bG09Dp52XI0HV9ZZKplgdzyeiqhrURqoXVXMFp-DbfcmqJAQ_-C_iO10MCBIFuT0nYwypYYC8KfEmcid5RF1oS1S7jdT710Erp9hU9NZL0wcda-TjwKBMSxMHvO5yU1WkTgn-_g');
 function sendmsg(req,res,err){
    
     var registrationTokens = [];
