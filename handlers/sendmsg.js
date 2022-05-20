@@ -1,5 +1,5 @@
 const user = require("../models/user.js");
-var serviceAccount = require("../yuktahanotifs-firebase-adminsdk-n8oul-d6c4a82482.json");
+var serviceAccount = require("../yuktahanotifs-firebase-adminsdk-n8oul-4d9ddf7ab3.json");
 var admin = require("firebase-admin");
 admin.initializeApp({
         credential: admin.credential.cert(serviceAccount)
@@ -25,6 +25,7 @@ function sendmsg(req,res,err){
     }
     user.findOne({"mobile":rec},(ferr,fres)=>{
         if (!ferr && fres){
+            console.log(fres.address);
             admin.messaging().sendToDevice(fres.address,payLoad,options)
             .then(function(response){
                 console.log(response);
