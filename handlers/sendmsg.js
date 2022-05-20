@@ -18,7 +18,7 @@ function sendmsg(req,res,err){
     var payLoad = {
         data:{
             fromNum:sen,
-            fromName:fromId,
+            fromName:sen,
             key:key,
             message:msg
         }
