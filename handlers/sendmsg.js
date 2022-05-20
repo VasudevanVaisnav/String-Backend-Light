@@ -1,41 +1,38 @@
-const gcm = require("node-gcm")
 const user = require("../models/user.js");
-const sender = new gcm.Sender('AAAABvcFeQk:APA91bFlHQPzHlRERqujhtnLSjSdajMpNlBLoq9ykowRqdBHZf3AoTUDDO_4VIzM6-N30aqqXVNUOfSWjDKPBkklmZPCjDHvga6DXsFfezu4Ndj3fOB9lu83VeWEbH1xRnLunP0gUQ14');
-function sendmsg(req,res,err){
-   
-    var registrationTokens = [];
-    const message = new gcm.Message({ 
-        priority:'high',
-        contentAvailable:true,
-        delayWhileIdle:true,
-        timeToLive:86400,
+var serviceAccount = require("../yuktahanotifs-firebase-adminsdk-n8oul-d6c4a82482.json");
+var admin = require("firebase-admin");
+admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount)
     });
+function sendmsg(req,res,err){
     console.log("sendmsg");
     console.log(req.body);
     const msg = req.body.message;
     const key = req.body.key;
     const rec = req.body.to;
     const sen = req.body.from;
-    message.addData('fromNum',sen);
-    message.addData('fromName',sen);
-    message.addData('key',key);
-    message.addData('message',msg);
+    var options = {
+        priority:"high",
+        timeToLive:60*60*24
+    };
+    var payLoad = {
+        data:{
+            fromNum:sen,
+            fromName:fromId,
+            key:key,
+            message:msg
+        }
+    }
     user.findOne({"mobile":rec},(ferr,fres)=>{
         if (!ferr && fres){
-            
-            registrationTokens = [];
-            registrationTokens.push(fres.address)
-            console.log(registrationTokens);
-            sender.send(message, { registrationTokens: registrationTokens }, 10, function (err, response) {
-                if(err){
-                    console.log("failure");
-                    console.log(err);
-                    return res.status(250).json({"error":true,"message":"not sent"})
-                }
-                else{
-                    console.log("Success");
-                    return res.status(200).json({"error":false,"message":"sent"})
-                }
+            admin.messaging().sendToDevice(fres.address,payLoad,options)
+            .then(function(response){
+                console.log(response);
+                return res.status(200).json({"error":false,"message":"Sent"});
+            })
+            .catch(function(error1){
+                console.log(error1);
+                return res.status(250).json({"error":true,"message":"Fail"});
             });
         }
         else{
