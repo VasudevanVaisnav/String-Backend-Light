@@ -32,6 +32,7 @@ function sendmsg(req,res,err){
                 return res.status(200).json({"error":false,"message":"Sent"});
             })
             .catch(function(error1){
+                console.log("^/|\^")
                 console.log(error1);
                 return res.status(250).json({"error":true,"message":"Fail"});
             });
