@@ -5,7 +5,7 @@ const user = require("../models/user");
 
 function login(req,res,next){
     console.log("Login");
-    console.log(req.body.uname);
+    console.log(req.body);
     const uname = req.body.uname;
     const pass = req.body.pass;
     if (!isNaN(uname)){
@@ -36,6 +36,7 @@ function login(req,res,next){
                         });
                     }
                     else{
+			console.log("Inalid Credentials");
                         return res.status(250).json({"error":true,"message":"invalid credentials"});
                     }
                 });

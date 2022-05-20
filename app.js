@@ -6,13 +6,8 @@ const clientRouter = require("./routes/clientRouter");
 
 let dbConnectCounter = 0;
 function dbConnect(){
-    mongoose.connect("mongodb+srv://vasudevan:JGHpSerdX1p9M4nr@cluster0.6z1e194.mongodb.net/?retryWrites=true&w=majority/ChatApp"
-      ,{
-        useNewUrlParser: true, 
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-        useCreateIndex: true
-    },(err)=>{
+    mongoose.connect("mongodb+srv://root:Vasu2103@cluster0.cjusl.mongodb.net?retryWrites=true&w=majority"
+      ,{ },(err)=>{
       if(!err)
         console.log("database connected");
       else if(dbConnectCounter<process.env.DB_RETRIES_MAX){
@@ -21,6 +16,7 @@ function dbConnect(){
         dbConnect();
       }
       else{
+        console.log(err);
         throw new Error("db connection failed");
       }
     });
